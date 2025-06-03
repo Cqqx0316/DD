@@ -44,23 +44,20 @@ document.getElementById('connect').addEventListener('click', async () => {
                 const length = parseInt(decodedStr.substr(start + 10 + i * 2, 2), 16);
                 const current = parseInt(decodedStr.substr(start + 20 + i * 2, 2), 16);
 
-                // 只有当所有数据都不是 FF 时才添加到传感器列表
-                if (temp !== 0xFF && length !== 0xFF && current !== 0xFF) {
-                    sensors.push({
-                        index: i + 1, // 保存传感器序号
-                        温度: temp,
-                        长度: length,
-                        电流: current
-                    });
-                }
+                sensors.push({
+                    index: i + 1,
+                    温度: temp === 0xFF ? '无效' : temp,
+                    长度: length === 0xFF ? '无效' : length,
+                    电流: current === 0xFF ? '无效' : current
+                });
             }
 
             // 填充表格
             const table = document.getElementById('sensor-table');
             const tbody = table.querySelector('tbody');
             tbody.innerHTML = '';
-            
-            // 只显示有效的传感器数据
+
+            // 显示所有传感器数据
             sensors.forEach((s) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>碳刷${s.index}</td>
@@ -70,9 +67,10 @@ document.getElementById('connect').addEventListener('click', async () => {
                     <td>${battery}</td>`;
                 tbody.appendChild(tr);
             });
-            
-            // 只有有数据时才显示表格
-            table.style.display = sensors.length > 0 ? '' : 'none';
+
+            // 始终显示表格
+            table.style.display = '';
+
         });
 
     } catch (error) {
