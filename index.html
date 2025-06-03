@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝牙配对应用</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <h1>蓝牙配对应用</h1>
+    <button id="connect">连接蓝牙设备</button>
+    <div id="device-info"></div>
+    <div id="raw-data" style="margin-top: 20px; font-size: 16px; color: #333;"></div>
+    <table id="sensor-table" border="1" style="margin-top:20px;display:none;">
+        <thead>
+            <tr>
+                <th>碳刷</th>
+                <th>温度</th>
+                <th>长度</th>
+                <th>电流</th>
+                <th>电池电量</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 数据行由JS填充 -->
+        </tbody>
+    </table>
+    <script src="app.js"></script>
+</body>
+</html>

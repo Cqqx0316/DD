@@ -1,0 +1,20 @@
+{
+  "name": "web-bluetooth-app",
+  "version": "1.0.0",
+  "description": "A web application to pair with Bluetooth devices and display broadcast data using the Web Bluetooth API.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "keywords": [
+    "bluetooth",
+    "web",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC"
+}
