@@ -1,4 +1,5 @@
 const app = document.getElementById('app');
+let connectedDevice = null; // 保存已连接的设备
 
 document.getElementById('connect').addEventListener('click', async () => {
     if (!navigator.bluetooth) {
@@ -10,6 +11,11 @@ document.getElementById('connect').addEventListener('click', async () => {
             acceptAllDevices: true,
             optionalServices: ['0000ffe0-0000-1000-8000-00805f9b34fb'] // 替换为设备支持的服务UUID
         });
+        
+        connectedDevice = device; // 保存设备引用
+        document.getElementById('connect').style.display = 'none';
+        document.getElementById('disconnect').style.display = 'inline-block';
+        
         document.getElementById('device-info').innerText = `已连接设备: ${device.name || '未知设备'}`;
 
         const server = await device.gatt.connect();
@@ -26,7 +32,7 @@ document.getElementById('connect').addEventListener('click', async () => {
             const rawDataDiv = document.getElementById('raw-data');
             rawDataDiv.innerText = `原始数据: ${decodedStr}`;
 
-            // 电量值
+                // 电量值
             const battery = parseInt(decodedStr.substr(2, 2), 16);
 
             // 解析传感器数据
@@ -72,6 +78,27 @@ document.getElementById('connect').addEventListener('click', async () => {
     } catch (error) {
         document.getElementById('device-info').innerText = `连接失败: ${error}`;
     }
+});
+
+// 添加断开连接的事件监听
+document.getElementById('disconnect').addEventListener('click', async () => {
+    if (connectedDevice && connectedDevice.gatt.connected) {
+        await connectedDevice.gatt.disconnect();
+        document.getElementById('device-info').innerText = '设备已断开连接';
+        document.getElementById('raw-data').innerText = '';
+        document.getElementById('sensor-table').style.display = 'none';
+        document.getElementById('connect').style.display = 'inline-block';
+        document.getElementById('disconnect').style.display = 'none';
+    }
+});
+
+// 监听设备断开连接事件
+connectedDevice?.addEventListener('gattserverdisconnected', () => {
+    document.getElementById('device-info').innerText = '设备连接已断开';
+    document.getElementById('raw-data').innerText = '';
+    document.getElementById('sensor-table').style.display = 'none';
+    document.getElementById('connect').style.display = 'inline-block';
+    document.getElementById('disconnect').style.display = 'none';
 });
 
 // 自定义 GB2312 解码函数
