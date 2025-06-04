@@ -68,6 +68,16 @@ h1 {
     background: #eaf2fb;
 }
 
+#current-time {
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0;
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
 @media (max-width: 600px) {
     #sensor-table, #sensor-table th, #sensor-table td {
         font-size: 12px;
