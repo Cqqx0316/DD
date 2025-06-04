@@ -30,17 +30,8 @@ document.getElementById('connect').addEventListener('click', async () => {
             // 解码为 GB2312 字符串并显示原始数据
             const decodedStr = decodeGB2312(buffer);
             const rawDataDiv = document.getElementById('raw-data');
-            // 获取当前时间
-            const now = new Date();
-            const timeStamp = now.toLocaleString('zh-CN', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            });
-            // 显示原始数据和时间戳
-            rawDataDiv.innerText = `原始数据: ${decodedStr} [${timeStamp}]`;
-            
+            rawDataDiv.innerText = `原始数据: ${decodedStr}`;
+
                 // 电量值
             const battery = parseInt(decodedStr.substr(2, 2), 16);
 
