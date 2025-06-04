@@ -1,5 +1,24 @@
 const app = document.getElementById('app');
 let connectedDevice = null; // 保存已连接的设备
+// 添加时间显示功能
+function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    document.getElementById('current-time').textContent = timeString;
+}
+
+// 初始化时间显示
+updateTime();
+// 每秒更新时间
+setInterval(updateTime, 1000);
 
 document.getElementById('connect').addEventListener('click', async () => {
     if (!navigator.bluetooth) {
