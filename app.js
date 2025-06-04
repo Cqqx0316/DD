@@ -31,13 +31,13 @@ document.getElementById('connect').addEventListener('click', async () => {
             const decodedStr = decodeGB2312(buffer);
             const rawDataDiv = document.getElementById('raw-data');
             // 获取当前时间
-        const now = new Date();
-        const timeStamp = now.toLocaleString('zh-CN', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        });
+            const now = new Date();
+            const timeStamp = now.toLocaleString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
             // 显示原始数据和时间戳
             rawDataDiv.innerText = `原始数据: ${decodedStr} [${timeStamp}]`;
             
