@@ -32,6 +32,7 @@ document.getElementById('connect').addEventListener('click', async () => {
             const rawDataDiv = document.getElementById('raw-data');
             const now = new Date();
             const timeStamp = now.toLocaleString('zh-CN', {
+                timeZone: 'Asia/Shanghai',
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
